@@ -1,8 +1,13 @@
 FROM kibana
 
-MAINTAINER Maik Ellerbrock (https://github.com/ellerbrock)
+LABEL maintainer "Maik Ellerbrock <opensource@frapsoft.com>"
 
-# Needed for PhantomJS
-RUN apt-get update
-RUN apt-get install -y libfontconfig libfreetype6
-RUN /usr/share/kibana/bin/kibana-plugin install x-pack
+ENV VERSION 0.1.0
+
+RUN \
+  apt-get update && \
+  apt-get install -y \
+    libfontconfig \
+    libfreetype6 && \
+  rm -rf /var/lib/apt/lists/* && \
+  usr/share/kibana/bin/kibana-plugin install x-pack
